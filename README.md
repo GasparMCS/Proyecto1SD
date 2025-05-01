@@ -85,7 +85,7 @@ python main.py --duracion 30 --tasa 15 --distribucion poisson
 
 ---
 
-## 📌 Endpoints de monitoreo (almacenamiento)
+##  Endpoints de monitoreo (almacenamiento)
 
 Método: GET  
 Ruta: /eventos/getall_ids  
@@ -105,7 +105,7 @@ Descripción: Borra todo el caché manualmente
 
 ---
 
-## 🧠 Justificación técnica
+##  Justificación técnica
 
 - Se utiliza MongoDB por su soporte nativo a TTL (vía índices).  
 - LRU se implementa manualmente como política de eliminación por tamaño.  
@@ -114,11 +114,7 @@ Descripción: Borra todo el caché manualmente
 
 ---
 
-## 👨‍💻 Autores
+##  Autores
 
 Martín Ramos Molina  
 Gaspar Campos Smith
-
----
-
-¿Te gustaría que adapte también este contenido para incluirlo como documentación en un sitio con GitHub Pages?
