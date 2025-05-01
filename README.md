@@ -17,24 +17,32 @@ Este proyecto corresponde a la Tarea 1 del curso de Sistemas Distribuidos de la 
 
 1. Clona el repositorio:
 
-```git clone https://github.com/Martinxito/Tarea-1-Sistemas-Distribuidos.git  
-cd Tarea-1-Sistemas-Distribuidos```
+```
+git clone https://github.com/Martinxito/Tarea-1-Sistemas-Distribuidos.git  
+cd Tarea-1-Sistemas-Distribuidos
+```
 
 2. Configura las variables de entorno para MongoDB Atlas. Crea un archivo .env con el siguiente contenido:
 
-```MONGO_USER=gasparcampos  
+```
+MONGO_USER=gasparcampos  
 MONGO_PASSWORD=gaspar123  
 MONGO_CLUSTER=cluster0.qs7x48f.mongodb.net  
 MONGO_DB=eventos  
-MONGO_COLLECTION=eventos_scrapeados```
+MONGO_COLLECTION=eventos_scrapeados
+```
 
 3. Levanta los servicios:
 
-```docker-compose up --build```
+```
+docker-compose up --build
+```
 
 Para ejecutar solo almacenamiento y generador:
 
-```docker-compose up almacenamiento generador```
+```
+docker-compose up almacenamiento generador
+```
 
 ---
 
@@ -71,7 +79,9 @@ Se evaluaron las siguientes combinaciones:
 
 Ejemplo de ejecución con duración y tasa:
 
-```python main.py --duracion 30 --tasa 15 --distribucion poisson```
+```
+python main.py --duracion 30 --tasa 15 --distribucion poisson
+```
 
 ---
 
