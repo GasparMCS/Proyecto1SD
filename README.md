@@ -21,7 +21,7 @@ Este proyecto corresponde a la Tarea 1 del curso de Sistemas Distribuidos de la 
 git clone https://github.com/Martinxito/Tarea-1-Sistemas-Distribuidos.git
 cd Tarea-1-Sistemas-Distribuidos
     Configura las variables de entorno para MongoDB Atlas:
-
+```
 Crea un archivo .env con lo siguiente:
 
 MONGO_USER=gasparcampos
