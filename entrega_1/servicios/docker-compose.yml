@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+
+  almacenamiento:
+    build: ./almacenamiento
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_URI=mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_CLUSTER}/${MONGO_DB}?retryWrites=true&w=majority&tls=true&authSource=admin
+      - MONGO_USER=${MONGO_USER}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_CLUSTER=${MONGO_CLUSTER}
+      - MONGO_DB=${MONGO_DB}
+      - MONGO_COLLECTION=${MONGO_COLLECTION}
+  
+  scraper:
+    build:
+      context: ./scraper
+    environment:  
+      - URL_MONGODB=http://almacenamiento:8000/eventos
+      - MAX_EVENTOS=10000
+    depends_on:
+      - almacenamiento
+
+  generador:
+    build:
+      context: ./generador_trafico
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MIN_IDS=10000
+      - ALMACENAMIENTO_URL=http://almacenamiento:8000/eventos/getall_ids
+    volumes:
+      - ./generador_trafico/app:/app
+    command: >
+      sh -c "sleep 10 && python main.py --duracion 30 --tasa 15 --distribucion poisson" 
+    depends_on:
+      - almacenamiento
