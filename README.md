@@ -5,7 +5,7 @@ Este proyecto corresponde a la Tarea 1 del curso de Sistemas Distribuidos de la 
 
 ---
 
-## 🚀 Componentes del sistema
+## Componentes del sistema
 
 - `scraper`: descarga eventos y los guarda en MongoDB.
 - `almacenamiento`: servicio web (FastAPI) que permite consultar eventos, con sistema de caché.
@@ -13,22 +13,22 @@ Este proyecto corresponde a la Tarea 1 del curso de Sistemas Distribuidos de la 
 
 ---
 
-## ⚙️ Instalación y ejecución
+## Instalación y ejecución
 
 1. Clona el repositorio:
 
 ```bash
 git clone https://github.com/Martinxito/Tarea-1-Sistemas-Distribuidos.git
 cd Tarea-1-Sistemas-Distribuidos
-    Configura las variables de entorno para MongoDB Atlas:
-```
-Crea un archivo .env con lo siguiente:
 
+Configura las variables de entorno para MongoDB Atlas, crea un archivo .env con lo siguiente:
+
+``bash
 MONGO_USER=gasparcampos
 MONGO_PASSWORD=gaspar123
 MONGO_CLUSTER=cluster0.qs7x48f.mongodb.net
 MONGO_DB=eventos
-MONGO_COLLECTION=eventos_scrapeados
+MONGO_COLLECTION=eventos_scrapeados```
 
     Levanta los servicios:
 
