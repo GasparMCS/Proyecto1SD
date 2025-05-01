@@ -99,10 +99,6 @@ Método: GET
 Ruta: /eventos/lru_stats  
 Descripción: Total eliminados por política LRU  
 
-Método: GET  
-Ruta: /eventos/ttl_stats  
-Descripción: Total estimado de TTL eliminados  
-
 Método: DELETE  
 Ruta: /eventos/cache  
 Descripción: Borra todo el caché manualmente  
