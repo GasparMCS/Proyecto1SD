@@ -1,106 +1,125 @@
+Perfecto, aquí tienes el contenido listo para copiar y pegar directamente en tu archivo `README.md`, **sin etiquetas como markdown, env, bash, ni comillas**:
+
+---
+
 # Tarea 1 - Sistemas Distribuidos
 
-Este proyecto corresponde a la Tarea 1 del curso de Sistemas Distribuidos de la Universidad Diego Portales. Implementa un sistema distribuido que evalúa políticas de cache (TTL y LRU) bajo distintos patrones de tráfico (Uniforme y Poisson), con resultados experimentales medibles.
-
-
----
-
-## Componentes del sistema
-
-- `scraper`: descarga eventos y los guarda en MongoDB.
-- `almacenamiento`: servicio web (FastAPI) que permite consultar eventos, con sistema de caché.
-- `generador`: simula tráfico con parámetros controlados y mide estadísticas.
+Este proyecto corresponde a la Tarea 1 del curso de Sistemas Distribuidos de la Universidad Diego Portales. Implementa un sistema distribuido que evalúa políticas de caché (TTL y LRU) bajo distintos patrones de tráfico (Uniforme y Poisson), con resultados experimentales medibles.
 
 ---
 
-## Instalación y ejecución
+## 🧱 Componentes del sistema
+
+- scraper: descarga eventos y los guarda en MongoDB.  
+- almacenamiento: servicio web (FastAPI) que permite consultar eventos, con sistema de caché.  
+- generador: simula tráfico con parámetros controlados y mide estadísticas.  
+
+---
+
+## ⚙️ Instalación y ejecución
 
 1. Clona el repositorio:
 
-```bash
-git clone https://github.com/Martinxito/Tarea-1-Sistemas-Distribuidos.git
+git clone https://github.com/Martinxito/Tarea-1-Sistemas-Distribuidos.git  
 cd Tarea-1-Sistemas-Distribuidos
 
-Configura las variables de entorno para MongoDB Atlas, crea un archivo .env con lo siguiente:
+2. Configura las variables de entorno para MongoDB Atlas. Crea un archivo .env con el siguiente contenido:
 
-``bash
-MONGO_USER=gasparcampos
-MONGO_PASSWORD=gaspar123
-MONGO_CLUSTER=cluster0.qs7x48f.mongodb.net
-MONGO_DB=eventos
-MONGO_COLLECTION=eventos_scrapeados```
+MONGO_USER=gasparcampos  
+MONGO_PASSWORD=gaspar123  
+MONGO_CLUSTER=cluster0.qs7x48f.mongodb.net  
+MONGO_DB=eventos  
+MONGO_COLLECTION=eventos_scrapeados
 
-    Levanta los servicios:
+3. Levanta los servicios:
 
 docker-compose up --build
 
-    Para ejecutar solo almacenamiento y generador:
+Para ejecutar solo almacenamiento y generador:
 
 docker-compose up almacenamiento generador
 
-🧪 Experimentos realizados
+---
+
+## 🧪 Experimentos realizados
 
 Se evaluaron las siguientes combinaciones:
-1. Solo LRU
 
-    Tamaños de cache: 500, 1000, 1500
+1. Solo LRU  
+- Tamaños de caché: 500, 1000, 1500  
+- Tráfico: Uniforme y Poisson  
+- Tiempo: 30 minutos  
+- Tasa: 15 consultas/segundo  
 
-    Tráfico: Uniforme y Poisson
+2. Solo TTL  
+- TTL: 5 min, 10 min, 15 min  
+- Tráfico: Uniforme y Poisson  
 
-    Tiempo: 30 minutos
+3. TTL (5 min) + LRU (500 y 1000)  
 
-    Tasa: 15 consultas por segundo
+---
 
-2. Solo TTL
+## 📊 Métricas recolectadas
 
-    TTL: 5 min, 10 min, 15 min
+- Total de consultas  
+- HITs y MISSes en caché  
+- Porcentaje de HIT  
+- Tiempo promedio de respuesta  
+- Eliminaciones por LRU  
+- Eliminaciones estimadas por TTL  
 
-    Tráfico: Uniforme y Poisson
+---
 
-3. TTL (5 min) + LRU (500 y 1000)
-📊 Métricas recolectadas
+## 💡 Uso del generador de tráfico
 
-    Total de consultas
-
-    HITs y MISSes en cache
-
-    Porcentaje de HIT
-
-    Tiempo promedio de respuesta
-
-    Eliminaciones por LRU
-
-    Eliminaciones estimadas por TTL
-
-💡 Uso del generador de tráfico
-
-Ejemplo de ejecución:
+Ejemplo de ejecución con duración y tasa:
 
 python main.py --duracion 30 --tasa 15 --distribucion poisson
 
-O versión rápida por número exacto de consultas:
+Ejemplo de ejecución por número exacto de consultas:
 
 python main.py --n 10000 --distribucion uniforme
 
-📌 Endpoints de monitoreo (almacenamiento)
-Método	Ruta	Descripción
-GET	/eventos/getall_ids	Lista todos los IDs disponibles
-GET	/eventos/{id}	Devuelve un evento desde cache o DB
-GET	/eventos/lru_stats	Total eliminados por política LRU
-GET	/eventos/ttl_stats	Total estimado de TTL eliminados
-DELETE	/eventos/cache	Borra todo el cache manualmente
-🧠 Justificación técnica
+---
 
-    Se utiliza MongoDB por su soporte nativo a TTL (vía índices).
+## 📌 Endpoints de monitoreo (almacenamiento)
 
-    LRU se implementa manualmente como política de eliminación por tamaño.
+Método: GET  
+Ruta: /eventos/getall_ids  
+Descripción: Lista todos los IDs disponibles  
 
-    El generador usa pausas controladas (capped exponential o uniforme) para simular tráfico realista y luego sin pausas para medir rendimiento máximo.
+Método: GET  
+Ruta: /eventos/{id}  
+Descripción: Devuelve un evento desde caché o DB  
 
-    FastAPI permite exponer métricas de forma simple para análisis.
+Método: GET  
+Ruta: /eventos/lru_stats  
+Descripción: Total eliminados por política LRU  
 
-👨‍💻 Autores
+Método: GET  
+Ruta: /eventos/ttl_stats  
+Descripción: Total estimado de TTL eliminados  
 
-    Martín Ramos Molina
+Método: DELETE  
+Ruta: /eventos/cache  
+Descripción: Borra todo el caché manualmente  
 
-    Gaspar Campos Smith
+---
+
+## 🧠 Justificación técnica
+
+- Se utiliza MongoDB por su soporte nativo a TTL (vía índices).  
+- LRU se implementa manualmente como política de eliminación por tamaño.  
+- El generador usa pausas controladas (exponencial acotada o uniforme) para simular tráfico realista, y luego sin pausas para pruebas de rendimiento máximo.  
+- FastAPI permite exponer métricas de forma simple para análisis y monitoreo.  
+
+---
+
+## 👨‍💻 Autores
+
+Martín Ramos Molina  
+Gaspar Campos Smith
+
+---
+
+¿Te gustaría que adapte también este contenido para incluirlo como documentación en un sitio con GitHub Pages?
