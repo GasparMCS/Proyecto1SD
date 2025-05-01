@@ -1,6 +1,3 @@
-Perfecto, aquí tienes el contenido listo para copiar y pegar directamente en tu archivo `README.md`, **sin etiquetas como markdown, env, bash, ni comillas**:
-
----
 
 # Tarea 1 - Sistemas Distribuidos
 
@@ -8,7 +5,7 @@ Este proyecto corresponde a la Tarea 1 del curso de Sistemas Distribuidos de la 
 
 ---
 
-## 🧱 Componentes del sistema
+## Componentes del sistema
 
 - scraper: descarga eventos y los guarda en MongoDB.  
 - almacenamiento: servicio web (FastAPI) que permite consultar eventos, con sistema de caché.  
@@ -16,32 +13,32 @@ Este proyecto corresponde a la Tarea 1 del curso de Sistemas Distribuidos de la 
 
 ---
 
-## ⚙️ Instalación y ejecución
+## Instalación y ejecución
 
 1. Clona el repositorio:
 
-git clone https://github.com/Martinxito/Tarea-1-Sistemas-Distribuidos.git  
-cd Tarea-1-Sistemas-Distribuidos
+```git clone https://github.com/Martinxito/Tarea-1-Sistemas-Distribuidos.git  
+cd Tarea-1-Sistemas-Distribuidos```
 
 2. Configura las variables de entorno para MongoDB Atlas. Crea un archivo .env con el siguiente contenido:
 
-MONGO_USER=gasparcampos  
+```MONGO_USER=gasparcampos  
 MONGO_PASSWORD=gaspar123  
 MONGO_CLUSTER=cluster0.qs7x48f.mongodb.net  
 MONGO_DB=eventos  
-MONGO_COLLECTION=eventos_scrapeados
+MONGO_COLLECTION=eventos_scrapeados```
 
 3. Levanta los servicios:
 
-docker-compose up --build
+```docker-compose up --build```
 
 Para ejecutar solo almacenamiento y generador:
 
-docker-compose up almacenamiento generador
+```docker-compose up almacenamiento generador```
 
 ---
 
-## 🧪 Experimentos realizados
+## Experimentos realizados
 
 Se evaluaron las siguientes combinaciones:
 
@@ -59,7 +56,7 @@ Se evaluaron las siguientes combinaciones:
 
 ---
 
-## 📊 Métricas recolectadas
+## Métricas recolectadas
 
 - Total de consultas  
 - HITs y MISSes en caché  
@@ -70,15 +67,11 @@ Se evaluaron las siguientes combinaciones:
 
 ---
 
-## 💡 Uso del generador de tráfico
+## Uso del generador de tráfico
 
 Ejemplo de ejecución con duración y tasa:
 
-python main.py --duracion 30 --tasa 15 --distribucion poisson
-
-Ejemplo de ejecución por número exacto de consultas:
-
-python main.py --n 10000 --distribucion uniforme
+```python main.py --duracion 30 --tasa 15 --distribucion poisson```
 
 ---
 
